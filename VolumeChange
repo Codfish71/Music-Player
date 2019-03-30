@@ -1,0 +1,46 @@
+from tkinter import *
+from pygame import mixer
+
+root = Tk()
+
+mixer.init()
+root.geometry('1100x600')
+root.title("Pentatonic")
+root.configure(bg='#263238')
+root.iconbitmap(r'icon1_qqB_icon.ico')
+
+menu = Menu(root)
+root.config(menu=menu)
+submenu = Menu(menu)
+menu.add_cascade(label='File') 
+
+
+label = Label(root,text="")
+#label.pack()
+
+def ply_btn():
+	mixer.music.load("Nights.mp3")
+	mixer.music.play()
+	print("Playing a song")
+
+def stp_btn():
+	mixer.music.stop()
+
+def set_vol(val):
+	volume = int(val)/100
+	mixer.music.set_volume(volume)
+
+ply_photo = PhotoImage(file='play-button.png')
+ply_btn = Button(root,image=ply_photo,command=ply_btn)
+ply_btn.place(x=450,y=500)
+
+stp_phto = PhotoImage(file="iconfinder_24_Stop_106221.png")
+stp_btn = Button(root,image=stp_phto,command=stp_btn)
+stp_btn.place(x=550,y=500)
+
+scale = Scale(root,from_=0,to=100,orient=HORIZONTAL,command=set_vol)
+scale.set(70)
+scale.place(x=800,y=520)
+
+root.mainloop()
+
